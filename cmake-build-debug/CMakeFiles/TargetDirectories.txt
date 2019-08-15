@@ -1,0 +1,4 @@
+/home2/clinux01/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home2/clinux01/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home2/clinux01/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/tests_ejercitacion.dir
+/home2/clinux01/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/tests_algobot.dir
