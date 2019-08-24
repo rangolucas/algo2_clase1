@@ -67,17 +67,17 @@ bool mismos_elementos_v2(vector<int> a, vector<int> b) {
 
 // Ejercicio 5
 map<int, int> contar_apariciones(vector<int> s) {
-    map<int, int> dict;
+    map<int, int> res;
 
     for(int elem : s){
-        if(dict.count(elem) == 1) {
-            dict[elem] = dict[elem] + 1;
+        if(res.count(elem) == 1) {
+            res[elem] = res[elem] + 1;
         }
         else {
-            dict[elem] = 1;
+            res[elem] = 1;
         }
     }
-    return dict;
+    return res;
 }
 
 // Ejercicio 6
@@ -106,18 +106,18 @@ set<int> interseccion(set<int> a, set<int> b) {
 
 // Ejercicio 8
 map<int, set<int>> agrupar_por_unidades(vector<int> s) {
-    map<int, set<int>> grupos;
+    map<int, set<int>> res;
 
     for(int i : s) {
-        grupos[i % 10].insert(i);
+        res[i % 10].insert(i);
     }
 
-    return grupos;
+    return res;
 }
 
 // Ejercicio 9
 vector<char> traducir(vector<pair<char, char>> tr, vector<char> str) {
-    vector<char> traduccion;
+    vector<char> res;
     map<char, char> dict;
     for(pair<char, char> tupla : tr) {
         dict[tupla.first] = tupla.second;
@@ -128,21 +128,40 @@ vector<char> traducir(vector<pair<char, char>> tr, vector<char> str) {
         if(dict.count(elem)) {
             decode = dict[elem];
         }
-        traduccion.push_back(decode);
+        res.push_back(decode);
     }
-    return traduccion;
+    return res;
 }
 
 // Ejercicio 10
 bool integrantes_repetidos(vector<Mail> s) {
-    set<set<LU>> set_libretas;
+    map<LU, set<LU>> grupos_por_libretas;
     for(Mail m : s) {
-        set_libretas.insert(m.libretas());
+      for(LU libreta : m.libretas())
+        if(grupos_por_libretas.count(libreta) == 1) {
+          if(grupos_por_libretas[libreta] != m.libretas()) {
+            return true;
+          }
+        } else {
+          grupos_por_libretas[libreta] == m.libretas();
+        }
     }
-    return s.size() != set_libretas.size();
+    return false;
 }
 
 // Ejercicio 11
 map<set<LU>, Mail> entregas_finales(vector<Mail> s) {
-  return map<set<LU>, Mail>();
+  map<set<LU>, Mail> res;
+  for(Mail mail : s) {
+    if(mail.adjunto()) {
+      set<LU> libretas = mail.libretas();
+      if(res.count(libretas) == 0) {
+        res[libretas] = mail;
+      } else if(res[libretas].fecha() < mail.fecha()) {
+        res[libretas] = mail;
+      }
+    }
+  }
+
+  return res;
 }
